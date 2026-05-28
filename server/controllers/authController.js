@@ -35,6 +35,19 @@ exports.registerUser = async (req, res) => {
 
       }
 
+      /* EMAIL VALIDATION */
+
+      const emailRegex =
+         /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+      if (!emailRegex.test(email)) {
+
+         return res.status(400).json({
+            message: "Enter valid gmail.com address"
+         });
+
+      }
+
       /* PHONE VALIDATION */
 
       const phoneRegex = /^[0-9]{10}$/;
@@ -43,19 +56,6 @@ exports.registerUser = async (req, res) => {
 
          return res.status(400).json({
             message: "Phone must contain only 10 numbers"
-         });
-
-      }
-
-      /* EMAIL VALIDATION */
-
-      const emailRegex =
-         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!emailRegex.test(email)) {
-
-         return res.status(400).json({
-            message: "Invalid email format"
          });
 
       }
