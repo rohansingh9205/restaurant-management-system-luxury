@@ -1,6 +1,6 @@
 const Order = require("../models/Order");
 const Product = require("../models/Product");
-const User = require("../models/User");
+const User = require("../models/user");
 
 exports.getDashboardStats = async (req, res) => {
 
