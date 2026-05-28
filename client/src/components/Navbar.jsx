@@ -53,24 +53,14 @@ function Navbar() {
 
                user ? (
 
-                  <>
+                  <button
+                     onClick={handleLogout}
+                     className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 transition"
+                  >
 
-                     <span className="text-yellow-400 font-bold">
+                     Logout
 
-                        {user.name}
-
-                     </span>
-
-                     <button
-                        onClick={handleLogout}
-                        className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 transition"
-                     >
-
-                        Logout
-
-                     </button>
-
-                  </>
+                  </button>
 
                ) : (
 
