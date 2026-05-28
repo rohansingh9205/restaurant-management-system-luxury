@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/User");
 
 const bcrypt = require("bcryptjs");
 
@@ -20,6 +20,8 @@ exports.registerUser = async (req, res) => {
          role
       } = req.body || {};
 
+      /* REQUIRED FIELDS */
+
       if (
          !name ||
          !email ||
@@ -33,22 +35,67 @@ exports.registerUser = async (req, res) => {
 
       }
 
-      const existingUser = await User.findOne({
-         $or: [{ email }, { phone }]
-      });
+      /* PHONE VALIDATION */
 
-      if (existingUser) {
+      const phoneRegex = /^[0-9]{10}$/;
+
+      if (!phoneRegex.test(phone)) {
 
          return res.status(400).json({
-            message: "User already exists"
+            message: "Phone must contain only 10 numbers"
          });
 
       }
+
+      /* EMAIL VALIDATION */
+
+      const emailRegex =
+         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+
+         return res.status(400).json({
+            message: "Invalid email format"
+         });
+
+      }
+
+      /* CHECK EXISTING EMAIL */
+
+      const existingEmail = await User.findOne({
+         email
+      });
+
+      if (existingEmail) {
+
+         return res.status(400).json({
+            message: "Email already exists"
+         });
+
+      }
+
+      /* CHECK EXISTING PHONE */
+
+      const existingPhone = await User.findOne({
+         phone
+      });
+
+      if (existingPhone) {
+
+         return res.status(400).json({
+            message: "Phone already exists"
+         });
+
+      }
+
+      /* HASH PASSWORD */
 
       const hashedPassword = await bcrypt.hash(
          password,
          10
       );
+
+      /* CREATE USER */
 
       const user = await User.create({
 
@@ -96,6 +143,8 @@ exports.loginUser = async (req, res) => {
          role
       } = req.body || {};
 
+      /* REQUIRED FIELDS */
+
       if (!email || !password) {
 
          return res.status(400).json({
@@ -103,6 +152,8 @@ exports.loginUser = async (req, res) => {
          });
 
       }
+
+      /* FIND USER */
 
       const user = await User.findOne({ email });
 
@@ -114,6 +165,8 @@ exports.loginUser = async (req, res) => {
 
       }
 
+      /* ROLE CHECK */
+
       if (user.role !== role) {
 
          return res.status(403).json({
@@ -121,6 +174,8 @@ exports.loginUser = async (req, res) => {
          });
 
       }
+
+      /* PASSWORD CHECK */
 
       const isMatch = await bcrypt.compare(
          password,
@@ -134,6 +189,8 @@ exports.loginUser = async (req, res) => {
          });
 
       }
+
+      /* GENERATE TOKEN */
 
       const token = jwt.sign(
 
@@ -149,6 +206,8 @@ exports.loginUser = async (req, res) => {
          }
 
       );
+
+      /* RESPONSE */
 
       res.status(200).json({
 
