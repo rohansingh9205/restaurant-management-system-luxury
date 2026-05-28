@@ -17,23 +17,25 @@ const orderRoutes = require("./routes/orderRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 
-connectDB();   
+connectDB();
 
 const app = express();
 
-app.use(
-   cors({
-      origin: [
-         "http://localhost:5173",
-         "http://localhost:5174",
-         "https://restaurant-management-system-luxury.vercel.app"
-      ],
-      credentials: true
-   })
-);
-app.use(helmet());
-app.use(morgan("dev"));
+app.use(cors({
+   origin: "*"
+}));
+
+app.use(express.json());
+
+app.use(express.urlencoded({
+   extended: true
+}));
+
 app.use(cookieParser());
+
+app.use(helmet());
+
+app.use(morgan("dev"));
 
 app.use("/api/auth", authRoutes);
 
