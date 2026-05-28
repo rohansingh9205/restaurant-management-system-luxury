@@ -17,17 +17,23 @@ function Register() {
 
          await axios.post(
 
-            "https://restaurant-management-system-luxury.onrender.com/api/auth/register",
+   "https://restaurant-management-system-luxury.onrender.com/api/auth/register",
 
-            {
-               name,
-               email,
-               phone,
-               password,
-               role: "user"
-            }
+   {
+      name,
+      email,
+      phone,
+      password,
+      role: "user"
+   },
 
-         );
+   {
+      headers: {
+         "Content-Type": "application/json"
+      }
+   }
+
+);
 
          toast.success("Account Created");
 
