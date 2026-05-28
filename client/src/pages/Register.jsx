@@ -1,12 +1,17 @@
 import { useState } from "react";
+
 import axios from "axios";
+
 import toast from "react-hot-toast";
 
 function Register() {
 
    const [name, setName] = useState("");
+
    const [email, setEmail] = useState("");
+
    const [phone, setPhone] = useState("");
+
    const [password, setPassword] = useState("");
 
    const handleRegister = async (e) => {
@@ -17,29 +22,31 @@ function Register() {
 
          await axios.post(
 
-   "https://restaurant-management-system-luxury.onrender.com/api/auth/register",
+            "https://restaurant-management-system-luxury.onrender.com/api/auth/register",
 
-   {
-      name,
-      email,
-      phone,
-      password,
-      role: "user"
-   },
+            {
+               name,
+               email,
+               phone,
+               password,
+               role: "user"
+            },
 
-   {
-      headers: {
-         "Content-Type": "application/json"
-      }
-   }
+            {
+               headers: {
+                  "Content-Type": "application/json"
+               }
+            }
 
-);
+         );
 
          toast.success("Account Created");
 
          window.location.href = "/login";
 
       } catch (error) {
+
+         console.log(error);
 
          toast.error(
             error.response?.data?.message || "Registration Failed"
@@ -56,7 +63,9 @@ function Register() {
          <div className="glass p-12 w-full max-w-md fade-up">
 
             <h1 className="section-title mb-10">
+
                Create Account
+
             </h1>
 
             <form
@@ -106,6 +115,21 @@ function Register() {
                </button>
 
             </form>
+
+            <p className="text-center text-gray-400 mt-6">
+
+               Already have an account?
+
+               <span
+                  onClick={() => window.location.href = "/login"}
+                  className="text-[#D4A373] cursor-pointer ml-2"
+               >
+
+                  Login
+
+               </span>
+
+            </p>
 
          </div>
 
