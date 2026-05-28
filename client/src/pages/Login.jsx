@@ -1,13 +1,10 @@
 import { useState } from "react";
-
 import axios from "axios";
-
 import toast from "react-hot-toast";
 
 function Login() {
 
    const [email, setEmail] = useState("");
-
    const [password, setPassword] = useState("");
 
    const handleLogin = async (e) => {
@@ -18,7 +15,7 @@ function Login() {
 
          const response = await axios.post(
 
-            "http://localhost:5000/api/auth/login",
+            "https://restaurant-management-system-luxury.onrender.com/api/auth/login",
 
             {
                email,
@@ -44,7 +41,9 @@ function Login() {
 
       } catch (error) {
 
-         toast.error(error.response.data.message);
+         toast.error(
+            error.response?.data?.message || "Login Failed"
+         );
 
       }
 
@@ -57,9 +56,7 @@ function Login() {
          <div className="glass p-12 w-full max-w-md fade-up">
 
             <h1 className="section-title mb-10">
-
                Welcome Back
-
             </h1>
 
             <form

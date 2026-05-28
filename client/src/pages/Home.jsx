@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
-
 import axios from "axios";
-
 import toast from "react-hot-toast";
 
 function Home({ cart, setCart }) {
 
    const [products, setProducts] = useState([]);
-
    const [selectedCategory, setSelectedCategory] = useState("All");
-
    const [showPayment, setShowPayment] = useState(false);
-
    const [paymentMethod, setPaymentMethod] = useState("UPI");
 
    useEffect(() => {
@@ -25,7 +20,7 @@ function Home({ cart, setCart }) {
       try {
 
          const response = await axios.get(
-            "http://localhost:5000/api/products"
+            "https://restaurant-management-system-luxury.onrender.com/api/products"
          );
 
          setProducts(response.data);
@@ -86,16 +81,13 @@ function Home({ cart, setCart }) {
 
          await axios.post(
 
-            "http://localhost:5000/api/orders",
+            "https://restaurant-management-system-luxury.onrender.com/api/orders",
 
             {
 
                orderItems,
-
                totalPrice,
-
                paymentMethod,
-
                paymentStatus: "Paid"
 
             },
@@ -113,11 +105,9 @@ function Home({ cart, setCart }) {
          );
 
          toast.success("Payment Successful");
-
          toast.success("Order Placed");
 
          setCart([]);
-
          setShowPayment(false);
 
       } catch (error) {
@@ -151,15 +141,11 @@ function Home({ cart, setCart }) {
          <div className="text-center mb-16 fade-up">
 
             <h1 className="section-title">
-
                Luxury Fine Dining
-
             </h1>
 
             <p className="section-subtitle">
-
                Premium Indian & Chinese Cuisine Experience
-
             </p>
 
          </div>
@@ -173,17 +159,11 @@ function Home({ cart, setCart }) {
                [
 
                   "All",
-
                   "Indian",
-
                   "Chinese",
-
                   "Japanese",
-
                   "Thai",
-
                   "Drinks",
-
                   "Dessert"
 
                ].map((category) => (
@@ -232,23 +212,17 @@ function Home({ cart, setCart }) {
                         <div className="menu-card-content">
 
                            <h2 className="menu-card-title">
-
                               {product.name}
-
                            </h2>
 
                            <p className="text-gray-400">
-
                               {product.description}
-
                            </p>
 
                            <div className="flex justify-between items-center mt-6">
 
                               <h3 className="menu-card-price text-2xl">
-
                                  ₹ {product.price}
-
                               </h3>
 
                               <button
@@ -277,9 +251,7 @@ function Home({ cart, setCart }) {
             <div className="glass p-8 h-fit sticky top-24">
 
                <h2 className="text-4xl mb-8 text-center text-[#F5E6D3]">
-
                   Your Table
-
                </h2>
 
                {
@@ -287,9 +259,7 @@ function Home({ cart, setCart }) {
                   cart.length === 0 ? (
 
                      <p className="text-center text-gray-500">
-
                         No dishes selected
-
                      </p>
 
                   ) : (
@@ -304,15 +274,11 @@ function Home({ cart, setCart }) {
                            <div>
 
                               <h3>
-
                                  {item.name}
-
                               </h3>
 
                               <p className="text-[#D4A373]">
-
                                  ₹ {item.price}
-
                               </p>
 
                            </div>
@@ -337,9 +303,7 @@ function Home({ cart, setCart }) {
                <div className="mt-10">
 
                   <h3 className="text-3xl font-bold text-center mb-6">
-
                      ₹ {totalPrice}
-
                   </h3>
 
                   <button
@@ -369,9 +333,7 @@ function Home({ cart, setCart }) {
                   <div className="glass p-10 w-[400px]">
 
                      <h2 className="text-4xl text-center mb-8 text-[#F5E6D3]">
-
                         Payment
-
                      </h2>
 
                      <div className="space-y-4">
@@ -403,9 +365,7 @@ function Home({ cart, setCart }) {
                      <div className="mt-8">
 
                         <h3 className="text-2xl text-center mb-6">
-
                            Total: ₹ {totalPrice}
-
                         </h3>
 
                         <button

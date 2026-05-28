@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-
 import axios from "axios";
 
 function Orders() {
 
    const [orders, setOrders] = useState([]);
-
    const [selectedOrder, setSelectedOrder] = useState(null);
 
    useEffect(() => {
@@ -22,7 +20,7 @@ function Orders() {
 
          const response = await axios.get(
 
-            "http://localhost:5000/api/orders/my-orders",
+            "https://restaurant-management-system-luxury.onrender.com/api/orders/my-orders",
 
             {
 
@@ -53,15 +51,11 @@ function Orders() {
          <div className="text-center mb-20 fade-up">
 
             <h1 className="section-title">
-
                Your Orders
-
             </h1>
 
             <p className="section-subtitle">
-
                View your premium dining history
-
             </p>
 
          </div>
@@ -82,21 +76,15 @@ function Orders() {
                         <div>
 
                            <h2 className="text-3xl text-[#F5E6D3] mb-3">
-
                               ₹ {order.totalPrice}
-
                            </h2>
 
                            <p className="text-gray-400">
-
                               Status: {order.orderStatus}
-
                            </p>
 
                            <p className="text-gray-500 mt-2">
-
                               Payment: {order.paymentStatus}
-
                            </p>
 
                         </div>
@@ -140,9 +128,7 @@ function Orders() {
                      </button>
 
                      <h2 className="text-4xl mb-8 text-[#F5E6D3]">
-
                         Order Details
-
                      </h2>
 
                      <div className="space-y-4">
@@ -159,23 +145,17 @@ function Orders() {
                                  <div>
 
                                     <h3 className="text-xl">
-
                                        {item.name}
-
                                     </h3>
 
                                     <p className="text-gray-500">
-
                                        Qty: {item.quantity}
-
                                     </p>
 
                                  </div>
 
                                  <p className="text-[#D4A373]">
-
                                     ₹ {item.price}
-
                                  </p>
 
                               </div>
@@ -189,15 +169,11 @@ function Orders() {
                      <div className="mt-8">
 
                         <h3 className="text-2xl text-[#D4A373] mb-3">
-
                            Estimated Time: 25 - 35 mins
-
                         </h3>
 
                         <p className="text-gray-400">
-
                            Chef is preparing your order with premium ingredients.
-
                         </p>
 
                      </div>

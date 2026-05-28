@@ -1,17 +1,12 @@
 import { useState } from "react";
-
 import axios from "axios";
-
 import toast from "react-hot-toast";
 
 function Register() {
 
    const [name, setName] = useState("");
-
    const [email, setEmail] = useState("");
-
    const [phone, setPhone] = useState("");
-
    const [password, setPassword] = useState("");
 
    const handleRegister = async (e) => {
@@ -22,7 +17,7 @@ function Register() {
 
          await axios.post(
 
-            "http://localhost:5000/api/auth/register",
+            "https://restaurant-management-system-luxury.onrender.com/api/auth/register",
 
             {
                name,
@@ -40,7 +35,9 @@ function Register() {
 
       } catch (error) {
 
-         toast.error(error.response.data.message);
+         toast.error(
+            error.response?.data?.message || "Registration Failed"
+         );
 
       }
 
@@ -53,9 +50,7 @@ function Register() {
          <div className="glass p-12 w-full max-w-md fade-up">
 
             <h1 className="section-title mb-10">
-
                Create Account
-
             </h1>
 
             <form

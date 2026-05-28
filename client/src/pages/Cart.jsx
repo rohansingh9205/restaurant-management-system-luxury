@@ -30,7 +30,7 @@ function Cart({ cart }) {
 
          await axios.post(
 
-            "http://localhost:5000/api/orders",
+            "https://restaurant-management-system-luxury.onrender.com/api/orders",
 
             {
 
