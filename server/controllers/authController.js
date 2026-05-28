@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken");
 
+/* =========================
+   REGISTER USER
+========================= */
+
 exports.registerUser = async (req, res) => {
 
    try {
@@ -14,7 +18,20 @@ exports.registerUser = async (req, res) => {
          phone,
          password,
          role
-      } = req.body;
+      } = req.body || {};
+
+      if (
+         !name ||
+         !email ||
+         !phone ||
+         !password
+      ) {
+
+         return res.status(400).json({
+            message: "All fields required"
+         });
+
+      }
 
       const existingUser = await User.findOne({
          $or: [{ email }, { phone }]
@@ -38,8 +55,10 @@ exports.registerUser = async (req, res) => {
          name,
          email,
          phone,
+
          password: hashedPassword,
-         role
+
+         role: role || "user"
 
       });
 
@@ -63,6 +82,10 @@ exports.registerUser = async (req, res) => {
 
 };
 
+/* =========================
+   LOGIN USER
+========================= */
+
 exports.loginUser = async (req, res) => {
 
    try {
@@ -71,7 +94,15 @@ exports.loginUser = async (req, res) => {
          email,
          password,
          role
-      } = req.body;
+      } = req.body || {};
+
+      if (!email || !password) {
+
+         return res.status(400).json({
+            message: "All fields required"
+         });
+
+      }
 
       const user = await User.findOne({ email });
 
