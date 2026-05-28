@@ -25,6 +25,7 @@ app.use(
    cors({
       origin: [
          "http://localhost:5173",
+         "http://localhost:5174",
          "https://restaurant-management-system-luxury.vercel.app"
       ],
       credentials: true
