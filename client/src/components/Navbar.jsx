@@ -18,77 +18,81 @@ function Navbar() {
 
    return (
 
-      <nav className="flex justify-between items-center px-10 py-6 bg-black text-white shadow-lg">
+      <nav className="bg-black text-white shadow-lg px-4 md:px-10 py-4">
 
-         <h1
-            className="text-3xl font-black cursor-pointer"
-            onClick={() => window.location.href = "/"}
-         >
+         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
 
-            Restaurant Luxury
-
-         </h1>
-
-         <div className="flex gap-4 items-center">
-
-            <button
+            <h1
+               className="text-2xl md:text-3xl font-black cursor-pointer text-center md:text-left"
                onClick={() => window.location.href = "/"}
-               className="px-5 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition"
             >
 
-               Home
+               Restaurant Luxury
 
-            </button>
+            </h1>
 
-            <button
-               onClick={() => window.location.href = "/orders"}
-               className="px-5 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition"
-            >
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4">
 
-               Orders
+               <button
+                  onClick={() => window.location.href = "/"}
+                  className="px-4 md:px-5 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition text-sm md:text-base"
+               >
 
-            </button>
+                  Home
 
-            {
+               </button>
 
-               user ? (
+               <button
+                  onClick={() => window.location.href = "/orders"}
+                  className="px-4 md:px-5 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition text-sm md:text-base"
+               >
 
-                  <button
-                     onClick={handleLogout}
-                     className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 transition"
-                  >
+                  Orders
 
-                     Logout
+               </button>
 
-                  </button>
+               {
 
-               ) : (
-
-                  <>
+                  user ? (
 
                      <button
-                        onClick={() => window.location.href = "/login"}
-                        className="px-5 py-2 rounded-xl bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition"
+                        onClick={handleLogout}
+                        className="px-4 md:px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 transition text-sm md:text-base"
                      >
 
-                        Login
+                        Logout
 
                      </button>
 
-                     <button
-                        onClick={() => window.location.href = "/register"}
-                        className="px-5 py-2 rounded-xl bg-white text-black font-bold hover:bg-gray-200 transition"
-                     >
+                  ) : (
 
-                        Register
+                     <>
 
-                     </button>
+                        <button
+                           onClick={() => window.location.href = "/login"}
+                           className="px-4 md:px-5 py-2 rounded-xl bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition text-sm md:text-base"
+                        >
 
-                  </>
+                           Login
 
-               )
+                        </button>
 
-            }
+                        <button
+                           onClick={() => window.location.href = "/register"}
+                           className="px-4 md:px-5 py-2 rounded-xl bg-white text-black font-bold hover:bg-gray-200 transition text-sm md:text-base"
+                        >
+
+                           Register
+
+                        </button>
+
+                     </>
+
+                  )
+
+               }
+
+            </div>
 
          </div>
 
